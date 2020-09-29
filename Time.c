@@ -20,6 +20,7 @@ int main()
     int x = 0, y = 0;
     printf("Input: ");
     scanf("%ld %s", &time.num, &time.type);
+    strlwr(time.type);
     char temp[4];
 
     strncpy(temp, time.type, 3);
