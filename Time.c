@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+void inst();
 long long multiply(long long a, int x, int y);
 long long divide(long long a, int x, int y);
 int numbering(char x[]);
@@ -14,6 +15,7 @@ typedef struct
 
 int main()
 {
+    inst();
     time time;
     int x = 0, y = 0;
     printf("Input: ");
@@ -26,13 +28,13 @@ int main()
     y = numbering(temp);
     if (x-y > 0)
     {
-        printf("Output: %lld %s", multiply(time.num, x, y), temp);
+        printf("Output: %lld %s\n", multiply(time.num, x, y), temp);
     } else if (x-y < 0)
     {
-        printf("Output: %lld %s", divide(time.num, x, y), temp);
+        printf("Output: %lld %s\n", divide(time.num, x, y), temp);
     } else
     {
-        printf("Output: %lld %s", time.num, temp);
+        printf("Output: %lld %s\n", time.num, temp);
     }
     return 0;
 }
@@ -76,4 +78,14 @@ int numbering(char x[])
     else if (strcmp(x,"wek") == 0)
         res = 5;
     return res;
+}
+
+void inst()
+{
+    printf("\n            ***********************\n");
+    printf("            **  Time Conversion  **\n");
+    printf("            ***********************\n");
+    printf("  -> Millisecond = mil      -> Second = sec\n  -> Minute = min           -> Hour = hrs\n");
+    printf("  -> Day = day              -> Week = wek\n\n");
+    printf("  USES: [AMOUNT] [UNIT]-[UNIT]\n  EXAMPLE: 1 day-hrs    ('-' is used as 'to')\n\n");
 }
