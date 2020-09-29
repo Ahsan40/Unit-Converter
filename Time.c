@@ -2,6 +2,7 @@
 #include <string.h>
 
 void inst();
+void wrongInp();
 long long multiply(long long a, int x, int y);
 long long divide(long long a, int x, int y);
 int numbering(char x[]);
@@ -24,8 +25,18 @@ int main()
 
     strncpy(temp, time.type, 3);
     x = numbering(temp);
+    if (x == -500)
+    {
+        wrongInp();
+        return -1;
+    }
     strcpy(temp, &time.type[4]);
     y = numbering(temp);
+    if (y == -500)
+    {
+        wrongInp();
+        return -1;
+    }
     if (x - y > 0)
     {
         printf("Output: %lld %s\n", multiply(time.num, x, y), temp);
@@ -78,7 +89,14 @@ int numbering(char x[])
         res = 4;
     else if (strcmp(x, "wek") == 0)
         res = 5;
+    else
+        res = -500;
     return res;
+}
+
+void wrongInp()
+{
+    printf("\nWRONG INPUT! PLEASE TRY AGAIN!\n");
 }
 
 void inst()
