@@ -3,13 +3,13 @@
 
 void inst();
 void wrongInp();
-long long multiply(long long a, int x, int y);
-long long divide(long long a, int x, int y);
+long multiply(long a, int x, int y);
+long divide(long a, int x, int y);
 int numbering(char x[]);
 
 typedef struct
 {
-    long long num;
+    long num;
     char type[7];
 } time;
 
@@ -39,23 +39,23 @@ int main()
     }
     if (x - y > 0)
     {
-        printf("Output: %lld %s\n", multiply(time.num, x, y), temp);
+        printf("Output: %ld %s\n", multiply(time.num, x, y), temp);
     }
     else if (x - y < 0)
     {
-        printf("Output: %lld %s\n", divide(time.num, x, y), temp);
+        printf("Output: %ld %s\n", divide(time.num, x, y), temp);
     }
     else
     {
-        printf("Output: %lld %s\n", time.num, temp);
+        printf("Output: %ld %s\n", time.num, temp);
     }
     return 0;
 }
 
-long long multiply(long long a, int x, int y)
+long multiply(long a, int x, int y)
 {
     int mul[] = {1000, 60, 60, 24, 7};
-    long long result = a;
+    long result = a;
     for (int i = y; i < x; i++)
     {
         result *= mul[i];
@@ -63,10 +63,10 @@ long long multiply(long long a, int x, int y)
     return result;
 }
 
-long long divide(long long a, int x, int y)
+long divide(long a, int x, int y)
 {
     int mul[] = {1000, 60, 60, 24, 7};
-    long long result = a;
+    long result = a;
     for (int i = x; i < y; i++)
     {
         result /= mul[i];
