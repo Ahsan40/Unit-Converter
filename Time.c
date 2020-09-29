@@ -12,7 +12,6 @@ typedef struct
     char type[7];
 } time;
 
-
 int main()
 {
     inst();
@@ -27,13 +26,15 @@ int main()
     x = numbering(temp);
     strcpy(temp, &time.type[4]);
     y = numbering(temp);
-    if (x-y > 0)
+    if (x - y > 0)
     {
         printf("Output: %lld %s\n", multiply(time.num, x, y), temp);
-    } else if (x-y < 0)
+    }
+    else if (x - y < 0)
     {
         printf("Output: %lld %s\n", divide(time.num, x, y), temp);
-    } else
+    }
+    else
     {
         printf("Output: %lld %s\n", time.num, temp);
     }
@@ -51,7 +52,6 @@ long long multiply(long long a, int x, int y)
     return result;
 }
 
-
 long long divide(long long a, int x, int y)
 {
     int mul[] = {1000, 60, 60, 24, 7};
@@ -66,17 +66,17 @@ long long divide(long long a, int x, int y)
 int numbering(char x[])
 {
     int res;
-    if (strcmp(x,"mil") == 0)
+    if (strcmp(x, "mil") == 0)
         res = 0;
-    else if (strcmp(x,"sec") == 0)
+    else if (strcmp(x, "sec") == 0)
         res = 1;
-    else if (strcmp(x,"min") == 0)
+    else if (strcmp(x, "min") == 0)
         res = 2;
-    else if (strcmp(x,"hrs") == 0)
+    else if (strcmp(x, "hrs") == 0)
         res = 3;
-    else if (strcmp(x,"day") == 0)
+    else if (strcmp(x, "day") == 0)
         res = 4;
-    else if (strcmp(x,"wek") == 0)
+    else if (strcmp(x, "wek") == 0)
         res = 5;
     return res;
 }
