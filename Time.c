@@ -38,17 +38,11 @@ int main()
         return -1;
     }
     if (x - y > 0)
-    {
         printf("Output: %ld %s\n", multiply(time.num, x, y), temp);
-    }
     else if (x - y < 0)
-    {
         printf("Output: %ld %s\n", divide(time.num, x, y), temp);
-    }
     else
-    {
         printf("Output: %ld %s\n", time.num, temp);
-    }
     return 0;
 }
 
@@ -57,9 +51,7 @@ long multiply(long a, int x, int y)
     int mul[] = {1000, 60, 60, 24, 7};
     long result = a;
     for (int i = y; i < x; i++)
-    {
         result *= mul[i];
-    }
     return result;
 }
 
@@ -68,30 +60,26 @@ long divide(long a, int x, int y)
     int mul[] = {1000, 60, 60, 24, 7};
     long result = a;
     for (int i = x; i < y; i++)
-    {
         result /= mul[i];
-    }
     return result;
 }
 
 int numbering(char x[])
 {
-    int res;
     if (strcmp(x, "mil") == 0)
-        res = 0;
+        return 0;
     else if (strcmp(x, "sec") == 0)
-        res = 1;
+        return 1;
     else if (strcmp(x, "min") == 0)
-        res = 2;
+        return 2;
     else if (strcmp(x, "hrs") == 0)
-        res = 3;
+        return 3;
     else if (strcmp(x, "day") == 0)
-        res = 4;
+        return 4;
     else if (strcmp(x, "wek") == 0)
-        res = 5;
+        return 5;
     else
-        res = -500;
-    return res;
+        return -500;
 }
 
 void wrongInp()
@@ -106,5 +94,5 @@ void inst()
     printf("            ***********************\n");
     printf("  -> Millisecond = mil      -> Second = sec\n  -> Minute = min           -> Hour = hrs\n");
     printf("  -> Day = day              -> Week = wek\n\n");
-    printf("  USES: [AMOUNT] [UNIT]-[UNIT]\n  EXAMPLE: 1 day-hrs    ('-' is used as 'to')\n\n");
+    printf("  USES: [AMOUNT] [CURRENT UNIT]-[CONVERT UNIT]\n  EXAMPLE: 1 day-hrs    ('-' is used as 'to')\n\n");
 }
