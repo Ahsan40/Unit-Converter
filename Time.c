@@ -4,7 +4,6 @@
 void tHeader();
 void tWrongInp();
 long tBigToSmall(long a, int x, int y);
-long tSmallToBig(long a, int x, int y);
 int tNumbering(char x[]);
 
 typedef struct
@@ -13,10 +12,19 @@ typedef struct
     char type[7];
 } time;
 
+typedef struct
+{
+    long big;
+    int small[7];
+} tSmallToBigReturn;
+
+tSmallToBigReturn tSmallToBig(long a, int x, int y);
+
 int main()
 {
     tHeader();
     time time;
+    tSmallToBigReturn result;
     int x = 0, y = 0;
     printf("Input: ");
     scanf("%ld %s", &time.num, &time.type);
@@ -37,10 +45,39 @@ int main()
         tWrongInp();
         return -1;
     }
+    result = tSmallToBig(time.num, x, y);
+    strupr(temp);
     if (x - y > 0)
         printf("Output: %ld %s\n", tBigToSmall(time.num, x, y), temp);
     else if (x - y < 0)
-        printf("Output: %ld %s\n", tSmallToBig(time.num, x, y), temp);
+    {
+        if (result.small[x] > 0)
+        {
+            printf("Output: ");
+            switch (4)
+            {
+            case 4:
+                if (result.small[4] != 0)
+                    printf("%d DAY ", result.small[4]);
+            case 3:
+                if (result.small[3] != 0)
+                    printf("%d HOUR ", result.small[3]);
+            case 2:
+                if (result.small[2] != 0)
+                    printf("%d MIN ", result.small[2]);
+            case 1:
+                if (result.small[1] != 0)
+                    printf("%d SEC ", result.small[1]);
+            case 0:
+                if (result.small[0] != 0)
+                    printf("%d MIL ", result.small[0]);
+                break;
+            }
+            printf("\n");
+        }
+        else
+            printf("Output: %ld %s\n", result.big, temp);
+    }
     else
         printf("Output: %ld %s\n", time.num, temp);
     return 0;
@@ -55,12 +92,16 @@ long tBigToSmall(long a, int x, int y)
     return result;
 }
 
-long tSmallToBig(long a, int x, int y)
+tSmallToBigReturn tSmallToBig(long a, int x, int y)
 {
+    tSmallToBigReturn result = {a, 0, 0, 0, 0, 0, 0};
+    result.small[7];
     int mul[] = {1000, 60, 60, 24, 7};
-    long result = a;
-    for (int i = x; i < y; i++)
-        result /= mul[i];
+    for (int i = x; i <= y; i++)
+    {
+        result.small[i] = result.big % mul[i];
+        result.big /= mul[i];
+    }
     return result;
 }
 
