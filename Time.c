@@ -1,24 +1,25 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 void tHeader();
 void tWrongInp();
-long tBigToSmall(long a, int x, int y);
+double tBigToSmall(double a, int x, int y);
 int tNumbering(char x[]);
 
 typedef struct
 {
-    long num;
+    double num;
     char type[7];
 } time;
 
 typedef struct
 {
-    long big;
+    double big;
     int small[7];
 } tSmallToBigReturn;
 
-tSmallToBigReturn tSmallToBig(long a, int x, int y);
+tSmallToBigReturn tSmallToBig(double a, int x, int y);
 
 int main()
 {
@@ -27,7 +28,7 @@ int main()
     tSmallToBigReturn result;
     int x = 0, y = 0;
     printf("Input: ");
-    scanf("%ld %s", &time.num, &time.type);
+    scanf("%lf %s", &time.num, &time.type);
     strlwr(time.type);
     char temp[4];
 
@@ -48,12 +49,12 @@ int main()
     result = tSmallToBig(time.num, x, y);
     strupr(temp);
     if (x - y > 0)
-        printf("Output: %ld %s\n", tBigToSmall(time.num, x, y), temp);
+        printf("Output: %.0lf %s\n", tBigToSmall(time.num, x, y), temp);
     else if (x - y < 0)
     {
         if ((result.small[x] > 0) || (result.small[x+1] > 0) || (result.small[y] > 0) || (result.small[y-1] > 0))
         {
-            printf("Output: %ld %s ", result.big, temp);
+            printf("Output: %.0lf %s ", result.big, temp);
             switch (y)
             {
             case 5:
@@ -79,31 +80,31 @@ int main()
             printf("\n");
         }
         else
-            printf("Output: %ld %s\n", result.big, temp);
+            printf("Output: %.0lf %s\n", result.big, temp);
     }
     else
-        printf("Output: %ld %s\n", time.num, temp);
+        printf("Output: %.0lf %s\n", time.num, temp);
     return 0;
 }
 
-long tBigToSmall(long a, int x, int y)
+double tBigToSmall(double a, int x, int y)
 {
-    int mul[] = {1000, 60, 60, 24, 7};
-    long result = a;
+    double mul[] = {1000, 60, 60, 24, 7};
+    double result = a;
     for (int i = y; i < x; i++)
         result *= mul[i];
     return result;
 }
 
-tSmallToBigReturn tSmallToBig(long a, int x, int y)
+tSmallToBigReturn tSmallToBig(double a, int x, int y)
 {
     tSmallToBigReturn result = {a, 0, 0, 0, 0, 0, 0};
     result.small[7];
-    int mul[] = {1000, 60, 60, 24, 7};
+    double mul[] = {1000, 60, 60, 24, 7};
     for (int i = x; i < y; i++)
     {
-        result.small[i] = result.big % mul[i];
-        result.big /= mul[i];
+        result.small[i] =(int)result.big % (int)mul[i];
+        result.big =  floor(result.big / mul[i]);
     }
     return result;
 }
