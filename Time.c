@@ -51,11 +51,14 @@ int main()
         printf("Output: %ld %s\n", tBigToSmall(time.num, x, y), temp);
     else if (x - y < 0)
     {
-        if (result.small[x] > 0)
+        if ((result.small[x] > 0) || (result.small[x+1] > 0) || (result.small[y] > 0) || (result.small[y-1] > 0))
         {
-            printf("Output: ");
-            switch (4)
+            printf("Output: %ld %s ", result.big, temp);
+            switch (y)
             {
+            case 5:
+                if (result.small[5] != 0)
+                    printf("%d WEEK ", result.small[5]);
             case 4:
                 if (result.small[4] != 0)
                     printf("%d DAY ", result.small[4]);
@@ -97,7 +100,7 @@ tSmallToBigReturn tSmallToBig(long a, int x, int y)
     tSmallToBigReturn result = {a, 0, 0, 0, 0, 0, 0};
     result.small[7];
     int mul[] = {1000, 60, 60, 24, 7};
-    for (int i = x; i <= y; i++)
+    for (int i = x; i < y; i++)
     {
         result.small[i] = result.big % mul[i];
         result.big /= mul[i];
