@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
-void inst();
-void wrongInp();
-long multiply(long a, int x, int y);
-long divide(long a, int x, int y);
-int numbering(char x[]);
+void tHeader();
+void tWrongInp();
+long tBigToSmall(long a, int x, int y);
+long tSmallToBig(long a, int x, int y);
+int tNumbering(char x[]);
 
 typedef struct
 {
@@ -15,7 +15,7 @@ typedef struct
 
 int main()
 {
-    inst();
+    tHeader();
     time time;
     int x = 0, y = 0;
     printf("Input: ");
@@ -24,29 +24,29 @@ int main()
     char temp[4];
 
     strncpy(temp, time.type, 3);
-    x = numbering(temp);
+    x = tNumbering(temp);
     if (x == -500)
     {
-        wrongInp();
+        tWrongInp();
         return -1;
     }
     strcpy(temp, &time.type[4]);
-    y = numbering(temp);
+    y = tNumbering(temp);
     if (y == -500)
     {
-        wrongInp();
+        tWrongInp();
         return -1;
     }
     if (x - y > 0)
-        printf("Output: %ld %s\n", multiply(time.num, x, y), temp);
+        printf("Output: %ld %s\n", tBigToSmall(time.num, x, y), temp);
     else if (x - y < 0)
-        printf("Output: %ld %s\n", divide(time.num, x, y), temp);
+        printf("Output: %ld %s\n", tSmallToBig(time.num, x, y), temp);
     else
         printf("Output: %ld %s\n", time.num, temp);
     return 0;
 }
 
-long multiply(long a, int x, int y)
+long tBigToSmall(long a, int x, int y)
 {
     int mul[] = {1000, 60, 60, 24, 7};
     long result = a;
@@ -55,7 +55,7 @@ long multiply(long a, int x, int y)
     return result;
 }
 
-long divide(long a, int x, int y)
+long tSmallToBig(long a, int x, int y)
 {
     int mul[] = {1000, 60, 60, 24, 7};
     long result = a;
@@ -64,7 +64,7 @@ long divide(long a, int x, int y)
     return result;
 }
 
-int numbering(char x[])
+int tNumbering(char x[])
 {
     if (strcmp(x, "mil") == 0)
         return 0;
@@ -82,12 +82,12 @@ int numbering(char x[])
         return -500;
 }
 
-void wrongInp()
+void tWrongInp()
 {
     printf("\nWRONG INPUT! PLEASE TRY AGAIN!\n");
 }
 
-void inst()
+void tHeader()
 {
     printf("\n            ***********************\n");
     printf("            **  Time Conversion  **\n");
